@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <title>Carbon Tracker</title>
+</head>
+
+<body>
+    <h1>Carbon Footprint Tracker</h1>
+    <div class="charts-div">
+        <h2>The role of our city</h2>
+        <p>
+            The Carbon Intensity chart below includes CO&#8322 emissions related to electricity generation for current half hour in London. That includes emissions from all large metered power stations, interconnector imports, transmission and distribution losses, and accounts for national electricity demand, embedded wind and solar generation.
+        </p>
+
+        <svg id="pie" class="charts"></svg>
+    </div>
+
+    <p id="footprint">Powered by <a href="https://carbonintensity.org.uk"class="link">Carbon intensity</a> API</p>
+
+    <script src="tracker.js"></script>
+</body>
+</html>

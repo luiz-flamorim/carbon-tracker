@@ -1,0 +1,111 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --bright: #dbdbdb;
+    --grey: #c7c7c7;
+    --dark: #353535;
+    --colour01: #0091DA;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--dark);
+    min-width: none;
+
+}
+
+.charts-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    max-width: 70%;
+    border-radius: 5px;
+    box-shadow: 0px 0px 20px black;
+    padding: 5%;
+}
+
+.charts {
+    margin-top: 3rem
+}
+
+/* TEXT STYLE   - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+h1 {
+    color: var(--bright);
+    text-transform: capitalize;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding: 2rem
+}
+
+h2{
+
+    width:100%;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+}
+
+p {
+    color: var(--dark);
+    line-height: 1.5rem
+}
+
+.pie-labels {
+    font-size: 0.8rem;
+    text-transform: capitalize;
+}
+
+.pie-centre-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.pie-centre {
+    font-size: 01rem;
+}
+
+.pie-centre-lower {
+    font-size: 0.7rem;
+    text-transform: capitalize;
+}
+
+#footprint {
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    color: var(--bright)
+}
+
+.link:link {
+    color: var(--bright);
+    text-decoration: none;
+}
+
+.link:visited {
+    color: var(--grey);
+}
+
+.link:hover {
+    color: var(--colour01);
+}
+
+.link:active {
+    color: var(--colour01);
+    opacity: 0.8;
+}
