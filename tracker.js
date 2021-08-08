@@ -1,10 +1,8 @@
-// TO DO:
-// tooltips for the doughnut
-
 // api from: https://carbonintensity.org.uk
 
-const apiEnergy = 'https://api.carbonintensity.org.uk/regional'
-const apiIntensity = 'https://api.carbonintensity.org.uk/regional/regionid/13'
+const apiEnergy = 'https://api.carbonintensity.org.uk/regional/regionid/13'
+const conversionfactors = 'conversionfactors.csv'
+
 let margin = {
     top: 20,
     right: 20,
@@ -15,21 +13,20 @@ const width = 1000 - margin.left - margin.right
 const height = 500 - margin.top - margin.bottom
 let delay = 1000
 
+
+d3.csv(conversionfactors)
+    .then(data => {
+        let factorsData = d3.groups(data, d => d.level1)
+        factorTable(factorsData)
+    });
+
+
 d3.json(apiEnergy)
-    .then(data => {
-        let london = data.data[0].regions[12]
-        doughnut(london);
-    });
-
-d3.json(apiIntensity)
-    .then(data => {
-        data = data.data[0]
-        console.log(data);
-        doughnutMiddle(data)
-    });
+    .then(data => buildDoughnutChart(data.data[0].data[0]))
 
 
-function doughnut(data) {
+
+function buildDoughnutChart(data) {
 
     let colours = d3.scaleSequential()
         .domain([0, data.generationmix.length])
@@ -48,8 +45,12 @@ function doughnut(data) {
         .value(d => d.perc)
     let pieArcs = pie(data.generationmix)
 
-    let svg = d3.select('#pie')
-        .attr("width", width)
+    let svgContainer = d3.select('#pie-london-container')
+        .append('svg')
+        .attr('class', 'charts')
+        .attr('id', `pie-london`)
+
+    let svg = svgContainer.attr("width", width)
         .attr("height", height)
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", `0 0 ${width} ${height}`)
@@ -99,45 +100,93 @@ function doughnut(data) {
         .text(d => d)
         .style('opacity', 0)
         .transition()
-        .delay(delay*1.2)
+        .delay(delay * 1.2)
         .attr('dy', (d, i) => i ? '1.2em' : 0)
         .style('opacity', 1)
-}
 
-function doughnutMiddle(data) {
-    let svg = d3.select('#pie')
-
-    let middleTitle = svg.append("text")
+    svg.append("text")
         .attr('transform', `translate(${ width / 2 },${1.2 * height / 2 })`)
         .attr("text-anchor", "middle")
         .attr('class', 'pie-centre-title')
-        .text(`${data.data[0].intensity.index}`)
-        .style('opacity',0)
+        .text(`${data.intensity.index}`)
+        .style('opacity', 0)
         .transition()
         .delay(delay)
         .attr('transform', `translate(${ width / 2 },${1.03* height / 2 })`)
-        .style('opacity',1)
+        .style('opacity', 1)
 
-    let middleText = svg.append("text")
+    svg.append("text")
         .attr('transform', `translate(${ width / 2 },${1.3 * height / 2 })`)
         .attr("text-anchor", "middle")
         .attr('class', 'pie-centre')
-        .text(`${data.data[0].intensity.forecast} gCO2/KWh`)
-        .style('opacity',0)
+        .text(`${data.intensity.forecast} gCO2/KWh`)
+        .style('opacity', 0)
         .transition()
         .delay(delay)
         .attr('transform', `translate(${ width / 2 },${1.15*height / 2 })`)
-        .style('opacity',1)
+        .style('opacity', 1)
 
-    let lowerText = svg.append("text")
+    svg.append("text")
         .attr('transform', `translate(${ width / 2 },${1.1* height / 2 })`)
         .attr("text-anchor", "middle")
         .attr('class', 'pie-centre-lower')
         .text(`London's carbon intensity level is`)
-        .style('opacity',0)
+        .style('opacity', 0)
         .transition()
         .delay(delay)
         .attr('transform', `translate(${ width / 2 },${0.86 * height / 2 })`)
-        .style('opacity',1)
+        .style('opacity', 1)
+}
+
+function factorTable(factorsData) {
+
+    console.log(factorsData)
+    factorsData.forEach(item => {
+        
+        let selector = document.querySelector('#factor-table')
+
+        let listItem = document.createElement('div')
+        listItem.setAttribute('class','list-item')
+        selector.appendChild(listItem)
+
+        let listFactor = document.createElement('div')
+        listFactor.setAttribute('class','list-factor')
+        listItem.appendChild(listFactor)
+
+        let titleFactor = document.createElement('h3')
+        titleFactor.innerHTML = item[0]
+        listFactor.appendChild(titleFactor)
+
+        let listAssetsDiv = document.createElement('div')
+        listAssetsDiv.setAttribute('class','list-assets')
+        listItem.appendChild(listAssetsDiv)
+
+        console.log(item[1])
+        // next loop
+        item[1].forEach(sub =>{
+            console.log(sub.lookup)
+        //     // let assetTitle = document.createElement('h4')
+        //     // assetTitle.setAttribute('class','list-asset-title')
+        //     // titleFactor.innerHTML = sub.lookup
+        //     // listAssetsDiv.appendChild(assetTitle)
+            
+        })
+
+    })
+
+
+
+    // let assetTitle = listAssets.append('div')
+    // .attr('class','list-asset-title')
+
+    // let asset1 = listAssets.append('div')
+    // .attr('class','list-asset-item')
+
+    // let asset2 = listAssets.append('div')
+    // .attr('class','list-asset-item')
+
+
+
+
 
 }
