@@ -142,15 +142,15 @@ function factorTable(factorsData) {
 
     console.log(factorsData)
     factorsData.forEach(item => {
-        
+
         let selector = document.querySelector('#factor-table')
 
         let listItem = document.createElement('div')
-        listItem.setAttribute('class','list-item')
+        listItem.setAttribute('class', 'list-item')
         selector.appendChild(listItem)
 
         let listFactor = document.createElement('div')
-        listFactor.setAttribute('class','list-factor')
+        listFactor.setAttribute('class', 'list-factor')
         listItem.appendChild(listFactor)
 
         let titleFactor = document.createElement('h3')
@@ -158,32 +158,43 @@ function factorTable(factorsData) {
         listFactor.appendChild(titleFactor)
 
         let listAssetsDiv = document.createElement('div')
-        listAssetsDiv.setAttribute('class','list-assets')
+        listAssetsDiv.setAttribute('class', 'list-assets')
         listItem.appendChild(listAssetsDiv)
 
-        console.log(item[1])
-        // next loop
-        item[1].forEach(sub =>{
-            console.log(sub.lookup)
-        //     // let assetTitle = document.createElement('h4')
-        //     // assetTitle.setAttribute('class','list-asset-title')
-        //     // titleFactor.innerHTML = sub.lookup
-        //     // listAssetsDiv.appendChild(assetTitle)
-            
+        item[1].forEach((sub, i) => {
+            let subListClass = 'sub-list-assets'
+
+            if (i % 2 == 0) {
+                subListClass = 'sub-list-assets-odd'
+            }
+
+            let sublist = document.createElement('div')
+            sublist.setAttribute('class', subListClass)
+            listAssetsDiv.appendChild(sublist)
+
+            let assetTitle = document.createElement('p')
+            assetTitle.setAttribute('class', 'list-sub-title')
+            assetTitle.innerHTML = sub.lookup
+            sublist.appendChild(assetTitle)
+
+            let ghg = document.createElement('p')
+            ghg.setAttribute('class', 'list-sub')
+            ghg.innerHTML = sub.ghg
+            sublist.appendChild(ghg)
+
+            let unitM = document.createElement('p')
+            unitM.setAttribute('class', 'list-sub')
+            unitM.innerHTML = sub.uom
+            sublist.appendChild(unitM)
+
+            let factor = document.createElement('p')
+            factor.setAttribute('class', 'list-sub')
+            factor.innerHTML = sub.conversionfactor
+            sublist.appendChild(factor)
         })
 
     })
 
-
-
-    // let assetTitle = listAssets.append('div')
-    // .attr('class','list-asset-title')
-
-    // let asset1 = listAssets.append('div')
-    // .attr('class','list-asset-item')
-
-    // let asset2 = listAssets.append('div')
-    // .attr('class','list-asset-item')
 
 
 

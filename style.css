@@ -62,23 +62,50 @@ h1 {
 
 h2{
     width:100%;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     text-align: left;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
 h3{
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: bold;
     text-align: left;
+    color: var(--colour01)
 }
 
-p {
+
+
+.paragraph-simple {
     color: var(--dark);
     line-height: 1.5rem;
     text-align: left;
     width: 100%;
+}
+
+.sub-list-assets, .sub-list-assets-odd{
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+margin-top: 0.5rem;
+padding:0.5rem;
+}
+
+.sub-list-assets-odd{
+background:rgba(0, 0, 0, 0.05)
+}
+
+
+.list-sub, .list-sub-title{
+    font-size: 0.8rem;
+    font-weight: normal;
+    text-align: left;
+    width: 20%;
+}
+
+.list-sub-title{
+    flex-grow: 2;
 }
 
 .pie-labels {
